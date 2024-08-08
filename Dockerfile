@@ -2,6 +2,7 @@
 FROM alpine:latest
 
 # 设置环境变量
+ARG LATEST_VERSION
 ENV GOATCOUNTER_LISTEN=:8080
 ENV GOATCOUNTER_DB="sqlite+file:/home/goatcounter/db/goatcounter.sqlite3"
 ENV GOATCOUNTER_OPTS="--automigrate"
