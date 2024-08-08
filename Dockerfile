@@ -1,7 +1,7 @@
+# 使用 Alpine 基础镜像
 FROM alpine:latest
 
 # 设置环境变量
-ARG GOATCOUNTER_VERSION=v2.5.0
 ENV GOATCOUNTER_LISTEN=:8080
 ENV GOATCOUNTER_DB="sqlite+file:/home/goatcounter/db/goatcounter.sqlite3"
 ENV GOATCOUNTER_OPTS="--automigrate"
@@ -13,14 +13,23 @@ RUN apk add --no-cache \
     tzdata \
     runit \
     libcap \
-    tzdata \
-    logrotate
+    tzdata \ 
+    logrotate 
 
 # 下载并解压 GoatCounter
 RUN mkdir -p /home/goatcounter/bin && \
-    dst="/home/goatcounter/bin/goatcounter-$GOATCOUNTER_VERSION" && \
+    dst="/home/goatcounter/bin/goatcounter-$LATEST_VERSION" && \
+    arch=$(uname -m) && \
+    if [ "$arch" = "x86_64" ]; then \
+        url="https://github.com/arp242/goatcounter/releases/download/$LATEST_VERSION/goatcounter-$LATEST_VERSION-linux-amd64.gz"; \
+    elif [ "$arch" = "aarch64" ]; then \
+        url="https://github.com/arp242/goatcounter/releases/download/$LATEST_VERSION/goatcounter-$LATEST_VERSION-linux-arm64.gz"; \
+    else \
+        echo "不支持的架构: $arch"; \
+        exit 1; \
+    fi && \
     if [ ! -f "$dst" ]; then \
-        curl -L "https://github.com/arp242/goatcounter/releases/download/$GOATCOUNTER_VERSION/goatcounter-$GOATCOUNTER_VERSION-linux-amd64.gz" | \
+        curl -L "$url" | \
         gzip -d > "$dst"; \
     fi && \
     chmod a+x "$dst" && \
