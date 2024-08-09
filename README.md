@@ -12,7 +12,8 @@
 1. 使用PostgreSQL数据库
 `GOATCOUNTER_DB = "postgresql+user=用户名 password=密码 host=主机 port=端口 dbname=数据库名称 sslmode=disable"`
 2. 启用电子邮件
- `GOATCOUNTER_COMMAND_1 = "-email-from=发件人`
+   
+ `GOATCOUNTER_COMMAND_1 = "-email-from=发件人“`
 
  `GOATCOUNTER_COMMAND_2 = "-smtp=smtp://用户名:密码@smtp.mailgun.org:587"`
  
