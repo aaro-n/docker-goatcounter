@@ -1,11 +1,10 @@
 version: '3.4'
-
 services:
-  next-terminal:
-    image: aaronlee/next-terminal:latest
+  goatcounter:
+    image: aaronlee/goatcounter:latest
     restart: always
-    container_name: next-terminal
+    container_name: goatcounter
     volumes:
-      ./data:/usr/local/next-terminal/data
+      - ./data:/home/goatcounter/db
     ports:
-      - 8088:8088
+      - 8080:8080
