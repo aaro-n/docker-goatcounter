@@ -13,5 +13,7 @@
 `GOATCOUNTER_DB = "postgresql+user=用户名 password=密码 host=主机 port=端口 dbname=数据库名称 sslmode=disable"`
 2. 启用电子邮件
  `GOATCOUNTER_COMMAND_1 = "-email-from=发件人`
+
  `GOATCOUNTER_COMMAND_2 = "-smtp=smtp://用户名:密码@smtp.mailgun.org:587"`
+ 
  如果用户名为：123@123.com，这写为123%40123.com，完整为`GOATCOUNTER_COMMAND_2 = "-smtp=smtp://123%40123.com:密码@smtp.mailgun.org:587"`
